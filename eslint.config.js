@@ -31,6 +31,10 @@ export default [
           extensions: ['.js', '.jsx'],
         },
       },
+      alias: {
+        map: [['@', './src']],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+      },
     },
     plugins: {
       react,
