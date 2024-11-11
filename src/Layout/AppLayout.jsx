@@ -1,3 +1,3 @@
 const AppLayout = () => {
-  return <div>레이아웃</div>;
+  return <div>레이아웃 컴포넌트</div>;
 };
