@@ -1,6 +1,6 @@
 //예시파일입니다.
 
-import styles from '@/pages/Page.module.scss';
+import styles from './Page.module.scss';
 
 const Page = () => {
   return (

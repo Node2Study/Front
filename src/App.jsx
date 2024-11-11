@@ -1,7 +1,7 @@
 import styles from './App.module.scss';
-import Example from './components/user/Example';
-import Page from './pages/Page';
-import { date } from './utils/date';
+import Example from '@/components/user/Example';
+import Page from '@/pages/Page';
+import { date } from '@/utils/date';
 
 function App() {
   return (
