@@ -1,3 +1,14 @@
-const AppLayout = () => {
-  return <div>레이아웃 컴포넌트</div>;
+import Navbar from '@/components/common/Navbar';
+import Footer from '../components/common/Footer';
+
+const AppLayout = ({ children }) => {
+  return (
+    <>
+      <Navbar />
+      <main>{children}</main>
+      <Footer />
+    </>
+  );
 };
+
+export default AppLayout;

@@ -1,17 +1,11 @@
-import styles from './App.module.scss';
-import Example from '@/components/user/Example';
-import Page from '@/pages/Page';
-import { date } from '@/utils/date';
+import AppLayout from '@/layout/AppLayout';
+import AppRouter from '@/routes/AppRouter';
 
 function App() {
   return (
-    <div className={styles.app}>
-      <header className={styles.appHeader}>
-        <Example />
-        {date()}
-        <Page />
-      </header>
-    </div>
+    <AppLayout>
+      <AppRouter />
+    </AppLayout>
   );
 }
 
