@@ -1,11 +1,12 @@
 import Navbar from '@/components/common/Navbar';
 import Footer from '../components/common/Footer';
+import styles from './AppLayout.module.scss';
 
 const AppLayout = ({ children }) => {
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <main className={styles.main}>{children}</main>
       <Footer />
     </>
   );
