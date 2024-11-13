@@ -1,0 +1,54 @@
+.registerForm {
+  width: 400px;
+  background-color: rgba(255, 0, 0, 0.1);
+  box-shadow: rgb(0, 0, 0, 0.3) 0 0 0.3rem;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin: 1rem;
+  padding: 0.4rem;
+}
+
+.id,
+.password {
+  padding: 0.5rem 0;
+}
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+form input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.forGot {
+  display: block;
+  text-align: right;
+}
+
+.submit {
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  background-color: rgb(255, 149, 149);
+}
+
+.register {
+  display: block;
+  margin: 0.6rem 0;
+  color: blue;
+  text-decoration-line: underline;
+}
