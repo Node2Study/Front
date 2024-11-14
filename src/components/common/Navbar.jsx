@@ -34,7 +34,9 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <button className={styles.login}>로그인</button>
+          <Link to={'/login'}>
+            <button className={styles.login}>로그인</button>
+          </Link>
         </div>
       </div>
     </nav>
