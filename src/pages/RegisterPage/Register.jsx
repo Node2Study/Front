@@ -1,31 +1,32 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Register.module.scss/';
+import { validatePassword } from '../../utils/validatePassword';
 
 const Register = () => {
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
+  const [nickName, setNickName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [verifyPassword, setVerifyPassword] = useState(false);
 
   const handleRegister = (e) => {
     e.preventDefault();
-
-    if (!username || !password) {
-      setError('아이디와 비밀번호를 모두 입력해주세요.');
-      return;
-    }
+    setVerifyPassword(validatePassword(password, confirmPassword));
   };
+
   return (
     <form className={styles.registerForm} onSubmit={handleRegister}>
       <h2 className={styles.title}>Register</h2>
-      {error && <p>{error}</p>}
       <div className={styles.id}>
         <label>Name</label>
         <input
           type="text"
           placeholder="user name"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          required={true}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div className={styles.id}>
@@ -33,24 +34,28 @@ const Register = () => {
         <input
           type="text"
           placeholder="user nickname"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          required={true}
+          value={nickName}
+          onChange={(e) => setNickName(e.target.value)}
         />
       </div>
       <div className={styles.id}>
         <label>Email</label>
         <input
           type="email"
-          placeholder="username@gmail.com"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder="name@gmail.com"
+          required={true}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div className={styles.password}>
         <label>Password</label>
+        {verifyPassword && <p className={styles.error}>{verifyPassword}</p>}
         <input
           type="password"
           placeholder="Password"
+          required={true}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -60,8 +65,8 @@ const Register = () => {
         <input
           type="password"
           placeholder="Confirm Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
       </div>
       <button className={styles.submit} type="submit">

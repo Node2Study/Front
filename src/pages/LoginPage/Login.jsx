@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
@@ -12,7 +12,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (!username || !password) {
+    if (!email || !password) {
       setError('아이디와 비밀번호를 모두 입력해주세요.');
       return;
     }
@@ -29,14 +29,14 @@ const Login = () => {
   return (
     <form className={styles.loginForm} onSubmit={handleLogin}>
       <h2 className={styles.title}>Login</h2>
-      {error && <p>{error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
       <div className={styles.id}>
         <label>Email</label>
         <input
           type="email"
-          placeholder="username@gmail.com"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder="email@gmail.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div className={styles.password}>
