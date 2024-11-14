@@ -17,6 +17,15 @@ const Login = () => {
       return;
     }
   };
+
+  const kakaoLogin = () => {
+    const REST_API_KEY = import.meta.env.VITE_KAKAO_API_KEY;
+    const REDIRECT_URI = 'http://localhost:5173/login';
+    const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
+
+    window.location.href = kakaoAuthURL;
+  };
+
   return (
     <form className={styles.loginForm} onSubmit={handleLogin}>
       <h2 className={styles.title}>Login</h2>
@@ -48,6 +57,13 @@ const Login = () => {
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
         <GoogleLogin onSuccess={''} onError={''} />
       </GoogleOAuthProvider>
+
+      <button onClick={kakaoLogin}>
+        <img
+          src="../public/image/kakao_login_medium_narrow.png"
+          alt="kakaoLogin"
+        />
+      </button>
       <Link to={'/register'} className={styles.register}>
         Register for free
       </Link>
