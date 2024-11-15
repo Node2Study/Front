@@ -7,9 +7,9 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menu = [
-    { name: '메뉴1', link: '/menu1' },
     { name: '메뉴2', link: '/menu2' },
     { name: '메뉴3', link: '/menu3' },
+    { name: '프로젝트 등록', link: '/update' },
   ];
 
   return (
