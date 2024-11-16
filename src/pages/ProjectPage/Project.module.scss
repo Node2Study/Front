@@ -1,0 +1,70 @@
+.upload {
+  max-width: 800px;
+  width: 100%;
+  margin: 20px auto;
+  padding-top: 30px;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.content {
+  padding: 30px 0;
+}
+
+.inputGroup {
+  margin-top: 40px;
+  font-size: 15px;
+
+  .label {
+    margin-bottom: 23px;
+    font-size: 15px;
+    position: relative;
+    display: inline-block;
+    border-radius: 20px;
+    background-color: $gray100;
+    padding: 10px 13px;
+  }
+  input {
+    color: $gray500;
+    outline: none;
+  }
+}
+
+.input {
+  border-bottom: 1px solid $gray200;
+  border-radius: 0;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+
+  button {
+    padding: 13px 20px;
+    font-size: 14px;
+    border-radius: 8px;
+    margin-bottom: 100px;
+  }
+}
+
+.registerButton {
+  background-color: $blue100;
+  &:hover {
+    background-color: $blue200;
+  }
+}
+
+.initButton {
+  background-color: $gray100;
+  &:hover {
+    background-color: $gray200;
+  }
+}
