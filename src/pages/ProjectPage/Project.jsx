@@ -1,3 +1,5 @@
+import TextSlider from '@/components/common/TextSlider';
+import { NOTI_MESSAGES } from '@/constants/message';
 import styles from './Project.module.scss';
 import { TfiWrite } from 'react-icons/tfi';
 
@@ -5,15 +7,19 @@ const Project = () => {
   const handleSubmit = () => {
     console.log('등록성공');
   };
+
   return (
     <section className={styles.upload}>
       <h2 className={styles.title}>
         <TfiWrite />
         프로젝트 등록
       </h2>
+      <div className={styles.notification}>
+        <TextSlider message={NOTI_MESSAGES} />
+      </div>
       <form className={styles.content} onSubmit={handleSubmit}>
         <div className={styles.inputGroup}>
-          <label className={styles.label} for="project-title">
+          <label className={styles.label} htmlFor="project-title">
             제목
           </label>
           <input
@@ -24,7 +30,7 @@ const Project = () => {
           />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label} for="project-description">
+          <label className={styles.label} htmlFor="project-description">
             설명
           </label>
           <input
@@ -35,7 +41,7 @@ const Project = () => {
           />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label} for="project-stack">
+          <label className={styles.label} htmlFor="project-stack">
             기술스택
           </label>
           <input
@@ -46,7 +52,7 @@ const Project = () => {
           />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label} for="project-team">
+          <label className={styles.label} htmlFor="project-team">
             팀 선택
           </label>
           <input
@@ -57,7 +63,7 @@ const Project = () => {
           />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label} for="project-github">
+          <label className={styles.label} htmlFor="project-github">
             깃허브
           </label>
           <input
@@ -68,7 +74,7 @@ const Project = () => {
           />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label} for="project-url">
+          <label className={styles.label} htmlFor="project-url">
             배포주소
           </label>
           <input
@@ -79,13 +85,13 @@ const Project = () => {
           />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label} for="project-start-date">
+          <label className={styles.label} htmlFor="project-start-date">
             시작날짜
           </label>
           <input type="date" id="project-start-date" className={styles.input} />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label} for="project-end-date">
+          <label className={styles.label} htmlFor="project-end-date">
             종료날짜
           </label>
           <input type="date" id="project-end-date" className={styles.input} />
