@@ -4,7 +4,7 @@
 }
 
 .profileSection {
-  max-width: 800px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -57,4 +57,13 @@
 .titleText {
   font-size: 15px;
   color: $gray300;
+}
+
+.listSection {
+  width: 100%;
+  max-width: 960px;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }

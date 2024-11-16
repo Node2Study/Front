@@ -1,3 +1,4 @@
+import PortfolioItem from '@/components/myPortfolio/PortfolioItem';
 import styles from './MyPortfolio.module.scss';
 
 const MyPortfolio = () => {
@@ -19,6 +20,12 @@ const MyPortfolio = () => {
           <span className={styles.titleText}>MY PROJECT</span>
           <span className={styles.text}>5</span>
         </div>
+      </div>
+      <div className={styles.listSection}>
+        <PortfolioItem />
+        <PortfolioItem />
+        <PortfolioItem />
+        <PortfolioItem />
       </div>
     </section>
   );
