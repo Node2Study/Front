@@ -1,0 +1,32 @@
+.textSlider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  .text {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(10%);
+    animation: fade-in-out 4s infinite;
+  }
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+  10%,
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+}
