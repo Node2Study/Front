@@ -9,7 +9,7 @@ const Navbar = () => {
   const menu = [
     { name: '메뉴2', link: '/menu2' },
     { name: '메뉴3', link: '/menu3' },
-    { name: '프로젝트 등록', link: '/update' },
+    { name: '프로젝트 등록', link: '/upload' },
   ];
 
   return (
