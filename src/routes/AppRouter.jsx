@@ -3,6 +3,7 @@ import Page from '@/pages/Page';
 import Login from '@/pages/LoginPage/Login';
 import Register from '../pages/RegisterPage/Register';
 import Project from '@/pages/ProjectPage/Project';
+import MyPortfolio from '@/pages/MyPortfolio/MyPortfolio';
 
 const AppRouter = () => {
   return (
@@ -11,6 +12,7 @@ const AppRouter = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/upload" element={<Project />} />
+      <Route path="/portfolio/:userId" element={<MyPortfolio />} />
     </Routes>
   );
 };
