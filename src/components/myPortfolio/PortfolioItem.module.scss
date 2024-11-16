@@ -1,0 +1,35 @@
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.itemImage {
+  width: 320px;
+  height: 181px;
+  background-color: $gray200;
+  border-radius: 10px;
+}
+.itemDetail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex: 1 0 0;
+}
+.itemExplanation {
+  @include ellipsis-text(7);
+  font-size: 15px;
+  line-height: 18px;
+  flex: 1;
+}
+
+.more {
+  width: 150px;
+  font-size: 15px;
+  padding: 10px 15px;
+  background-color: $blue100;
+  border-radius: 10px;
+  margin-left: auto;
+}
