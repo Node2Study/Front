@@ -13,6 +13,7 @@ const AppRouter = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/upload" element={<Project />} />
       <Route path="/portfolio/:userId" element={<MyPortfolio />} />
+      <Route path='/my-detail/:projectId' element={<MyPortfolio />} />
     </Routes>
   );
 };

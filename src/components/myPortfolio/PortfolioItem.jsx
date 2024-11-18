@@ -1,6 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './PortfolioItem.module.scss';
 
 const PortfolioItem = () => {
+  const router = useNavigate();
+
+  const handleMyDetail = () => {
+    router('/my-detail/123');  
+  }
   return (
     <section className={styles.item}>
       <div className={styles.itemImage}>이미지영역</div>
@@ -27,7 +33,7 @@ const PortfolioItem = () => {
           fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
           sunt in culpa qui officia deserunt mollit anim id est laborum.
         </div>
-        <button type="button" className={styles.more}>
+        <button type="button" className={styles.more} onClick={handleMyDetail}>
           상세보기
         </button>
       </div>
