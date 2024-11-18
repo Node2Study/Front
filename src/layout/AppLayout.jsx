@@ -6,10 +6,10 @@ import { useEffect } from 'react';
 import { validateToken } from '../api/user.api';
 
 const AppLayout = ({ children }) => {
-  const { user, setUser } = useUserStore();
+  const { user, setUser, setAccessToken } = useUserStore();
 
   useEffect(() => {
-    validateToken(setUser);
+    validateToken(setUser, setAccessToken);
   }, []);
 
   return (

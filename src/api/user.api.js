@@ -34,9 +34,11 @@ export const loginEmail = async (
   }
 };
 
-export const validateToken = async (setUser) => {
+export const validateToken = async (setUser, setAccessToken) => {
   try {
     const response = await api.get('/user');
+
+    setAccessToken(response.data.accessToken);
     setUser(response.data.findUser);
   } catch (error) {}
 };
