@@ -1,0 +1,92 @@
+.detailInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.title {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.contentWrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.image {
+    width: 400px;
+    height: 400px;
+    background-color: $gray200;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.comment {
+    margin-top: 50px;
+}
+
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .infoTitle {
+        font-size: 15px;
+        font-weight: 700;
+        
+    }
+}
+
+.infoTeam {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    li {
+        padding: 10px;
+        border-radius: 30px;
+
+        &:nth-child(4n+1) {
+            background-color: #ecc3c3; 
+          }
+          &:nth-child(4n+2) {
+            background-color: #bee4be; 
+          }
+          &:nth-child(4n+3) {
+            background-color: #b9b9e0; 
+          }
+          &:nth-child(4n+4) {
+            background-color: #ffffc2; 
+          }
+    }
+}
+
+.infoLink {
+    img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.infoStack {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    li {
+        padding: 10px;
+        border-radius: 30px;
+        background-color: #f0f0f0;
+
+        &::before {
+            content: '# ';
+        }
+    }
+}
