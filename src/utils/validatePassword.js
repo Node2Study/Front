@@ -4,7 +4,6 @@ export const validatePassword = (password, confirmPassword) => {
   const hasLowerCase = /[a-z]/.test(password);
   const hasNumber = /[0-9]/.test(password);
   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-  console.log(password);
 
   if (password.length < minLength) {
     return '비밀번호는 최소 8자 이상이어야 합니다.';
