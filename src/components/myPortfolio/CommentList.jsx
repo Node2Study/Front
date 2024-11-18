@@ -41,7 +41,7 @@ const CommentList = () => {
                         <div key={tab.id} className={`${styles.commentList} ${styles.selectedContent}`}>
                                 <div className={styles.commnetContainer}>
                                 {tab.data.map((comment, index) => (
-                                    <Comment key={index} content={comment} />
+                                    <Comment key={index} type={tab.id} />
                                 ))}
                                 </div>
                         </div>

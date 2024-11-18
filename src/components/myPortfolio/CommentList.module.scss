@@ -52,6 +52,7 @@ $shadow-intense-color: rgba(0, 0, 0, 0.2);
     border-radius: 0 0 4px 4px;
     border: 1px solid $gray100;
     border-top: none; 
+    margin-top: 35px;
 
     &.selectedContent {
         display: block;
@@ -62,7 +63,7 @@ $shadow-intense-color: rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
+    gap: 40px;
     padding: 10px;
 
 }
