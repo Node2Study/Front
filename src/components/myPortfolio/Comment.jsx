@@ -12,7 +12,7 @@ const Comment = ({ type }) => {
             }
             <div className={styles.commentContent}>
                 <RatingStar ratingAvg={3.2}/>
-                <p>댓글내용이 들어갑니다..!!</p>
+                <p className={styles.content}>댓글내용이 들어갑니다..!!</p>
             </div>
         </div>
     );
