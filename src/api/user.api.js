@@ -34,6 +34,16 @@ export const loginEmail = async (
   }
 };
 
+export const userLogout = async () => {
+  try {
+    await api.get('/auth/logout');
+
+    alert('로그아웃 성공 했습니다.');
+  } catch (error) {
+    alert(error.response?.data?.error);
+  }
+};
+
 export const validateToken = async (setUser, setAccessToken) => {
   try {
     const response = await api.get('/user');

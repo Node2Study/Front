@@ -6,7 +6,7 @@ const useUserStore = create((set) => ({
   accessToken: '',
   setUser: (newUser) => set({ user: newUser }),
   setAccessToken: (newToken) => set({ accessToken: newToken }),
-  resetUser: () => set({ user: '' }),
+  resetUser: () => set({ user: '', accessToken: '' }),
 }));
 
 export default useUserStore;
