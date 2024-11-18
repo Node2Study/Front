@@ -3,7 +3,7 @@ import styles from './Navbar.module.scss';
 import { Link } from 'react-router-dom';
 import { RxHamburgerMenu } from 'react-icons/rx';
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menu = [
@@ -34,8 +34,10 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <Link to={'/login'}>
-            <button className={styles.login}>로그인</button>
+          <Link to={user || '/login'}>
+            <button className={styles.login}>
+              {user ? '로그아웃' : '로그인'}
+            </button>
           </Link>
         </div>
       </div>

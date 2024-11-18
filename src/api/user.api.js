@@ -33,3 +33,10 @@ export const loginEmail = async (
     alert(error.response?.data?.error);
   }
 };
+
+export const validateToken = async (setUser) => {
+  try {
+    const response = await api.get('/user');
+    setUser(response.data.findUser);
+  } catch (error) {}
+};
