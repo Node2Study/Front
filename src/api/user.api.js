@@ -12,3 +12,24 @@ export const registerUser = async (formData, navigate) => {
     alert(error.response?.data?.error);
   }
 };
+
+export const loginEmail = async (
+  email,
+  password,
+  setAccessToken,
+  navigate,
+  setUser,
+) => {
+  try {
+    const response = await api.post('/auth/login', { email, password });
+
+    setUser(response.data.findUser);
+    setAccessToken(response.data.accessToken);
+
+    alert('로그인 성공 했습니다.');
+
+    return navigate('/');
+  } catch (error) {
+    alert(error.response?.data?.error);
+  }
+};
