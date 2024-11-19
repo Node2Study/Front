@@ -5,6 +5,7 @@ const useUserStore = create((set) => ({
   newSocialUser: '',
   accessToken: '',
   setUser: (newUser) => set({ user: newUser }),
+  setNewSocialUser: (newUser) => set({ newSocialUser: newUser }),
   setAccessToken: (newToken) => set({ accessToken: newToken }),
   resetUser: () => set({ user: '', accessToken: '' }),
 }));
