@@ -34,7 +34,7 @@ export const loginEmail = async (
   }
 };
 
-export const socialLogin = async (
+export const googleLogin = async (
   idToken,
   navigate,
   setUser,
@@ -72,5 +72,7 @@ export const validateToken = async (setUser, setAccessToken) => {
 
     setAccessToken(response.data.accessToken);
     setUser(response.data.findUser);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error.response?.data?.error);
+  }
 };

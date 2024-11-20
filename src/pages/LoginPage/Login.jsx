@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import styles from './Login.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-import { loginEmail, socialLogin } from '../../api/user.api';
+import { loginEmail, googleLogin } from '../../api/user.api';
 import useUserStore from '../../stores/useUserStore';
+import { KAKAO_URL } from '../../constants/login.constants';
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-const KAKAO_API_KEY = import.meta.env.VITE_KAKAO_API_KEY;
-const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -27,11 +26,10 @@ const Login = () => {
   };
 
   const handleSocialLogin = async (event) => {
-    if (event.target?.name === 'kakao') {
-      const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}`;
-      window.location.href = kakaoAuthURL;
+    if (event?.target?.name === 'kakao') {
+      window.location.href = KAKAO_URL;
     } else {
-      socialLogin(event.credential, navigate, setUser, setNewSocialUser);
+      googleLogin(event.credential, navigate, setUser, setNewSocialUser);
     }
   };
 
@@ -73,13 +71,12 @@ const Login = () => {
         />
       </GoogleOAuthProvider>
 
-      <button onClick={handleSocialLogin}>
-        <img
-          name="kakao"
-          src="../public/image/kakao_login_medium_narrow.png"
-          alt="kakaoLogin"
-        />
-      </button>
+      <img
+        onClick={handleSocialLogin}
+        name="kakao"
+        src="../public/image/kakao_login_medium_narrow.png"
+        alt="kakaoLogin"
+      />
       <Link to={'/register'} className={styles.register}>
         Register for free
       </Link>
