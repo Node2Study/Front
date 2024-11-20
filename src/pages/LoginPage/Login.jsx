@@ -62,21 +62,21 @@ const Login = () => {
         Login
       </button>
 
-      <div>외부 로그인</div>
-      <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <button className={styles.googleLoginBtn}>
         <GoogleLogin
           name="google"
+          width={290}
           onSuccess={handleSocialLogin}
           onError={() => console.log('로그인 실패')}
         />
-      </GoogleOAuthProvider>
-
-      <img
-        onClick={handleSocialLogin}
-        name="kakao"
-        src="../public/image/kakao_login_medium_narrow.png"
-        alt="kakaoLogin"
-      />
+      </button>
+      <button className={styles.kakaoLoginBtn} onClick={handleSocialLogin}>
+        <img
+          name="kakao"
+          src="../public/image/kakao_login_medium_wide.png"
+          alt="kakaoLogin"
+        />
+      </button>
       <Link to={'/register'} className={styles.register}>
         Register for free
       </Link>
