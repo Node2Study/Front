@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Register.module.scss';
 import { validatePassword } from '@/utils/validatePassword';
 import { registerUser } from '../../api/user.api';
+import useUserStore from '../../stores/useUserStore';
 
 const Register = () => {
   const navigate = useNavigate();
+  const { newSocialUser } = useUserStore();
   const [formData, setFormData] = useState({
     name: '',
     nickName: '',
@@ -23,6 +25,7 @@ const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    if (!!newSocialUser) return registerUser(formData, navigate);
 
     const passwordError = validatePassword(
       formData.password,
@@ -35,6 +38,15 @@ const Register = () => {
     registerUser(formData, navigate);
   };
 
+  useEffect(() => {
+    if (newSocialUser) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        ...newSocialUser,
+      }));
+    }
+  }, []);
+
   return (
     <form className={styles.registerForm} onSubmit={handleRegister}>
       <h2 className={styles.title}>Register</h2>
@@ -45,6 +57,7 @@ const Register = () => {
           name="name"
           placeholder="user name"
           required={true}
+          disabled={!!newSocialUser}
           value={formData.name}
           onChange={handleInputChange}
         />
@@ -67,6 +80,7 @@ const Register = () => {
           name="email"
           placeholder="name@gmail.com"
           required={true}
+          disabled={!!newSocialUser}
           value={formData.email}
           onChange={handleInputChange}
         />
@@ -79,6 +93,7 @@ const Register = () => {
           name="password"
           placeholder="Password"
           required={true}
+          disabled={!!newSocialUser}
           value={formData.password}
           onChange={handleInputChange}
         />
@@ -89,6 +104,7 @@ const Register = () => {
           type="password"
           name="confirmPassword"
           placeholder="Confirm Password"
+          disabled={!!newSocialUser}
           value={formData.confirmPassword}
           onChange={handleInputChange}
         />

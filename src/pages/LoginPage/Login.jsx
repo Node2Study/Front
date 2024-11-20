@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './Login.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-import { loginEmail } from '../../api/user.api';
+import { loginEmail, googleLogin } from '../../api/user.api';
 import useUserStore from '../../stores/useUserStore';
+import { KAKAO_URL } from '../../constants/login.constants';
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 const Login = () => {
@@ -11,7 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { setUser, setAccessToken } = useUserStore();
+  const { setUser, setAccessToken, setNewSocialUser } = useUserStore();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -24,12 +25,12 @@ const Login = () => {
     loginEmail(email, password, setAccessToken, navigate, setUser);
   };
 
-  const kakaoLogin = () => {
-    const REST_API_KEY = import.meta.env.VITE_KAKAO_API_KEY;
-    const REDIRECT_URI = 'http://localhost:5173/login';
-    const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
-
-    window.location.href = kakaoAuthURL;
+  const handleSocialLogin = async (event) => {
+    if (event?.target?.name === 'kakao') {
+      window.location.href = KAKAO_URL;
+    } else {
+      googleLogin(event.credential, navigate, setUser, setNewSocialUser);
+    }
   };
 
   return (
@@ -61,16 +62,21 @@ const Login = () => {
         Login
       </button>
 
+      <div>외부 로그인</div>
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-        <GoogleLogin onSuccess={''} onError={''} />
+        <GoogleLogin
+          name="google"
+          onSuccess={handleSocialLogin}
+          onError={() => console.log('로그인 실패')}
+        />
       </GoogleOAuthProvider>
 
-      <button onClick={kakaoLogin}>
-        <img
-          src="../public/image/kakao_login_medium_narrow.png"
-          alt="kakaoLogin"
-        />
-      </button>
+      <img
+        onClick={handleSocialLogin}
+        name="kakao"
+        src="../public/image/kakao_login_medium_narrow.png"
+        alt="kakaoLogin"
+      />
       <Link to={'/register'} className={styles.register}>
         Register for free
       </Link>

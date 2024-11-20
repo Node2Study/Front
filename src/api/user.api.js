@@ -34,6 +34,28 @@ export const loginEmail = async (
   }
 };
 
+export const googleLogin = async (
+  idToken,
+  navigate,
+  setUser,
+  setNewSocialUser,
+) => {
+  try {
+    const response = await api.post('/auth/social', { idToken });
+
+    if (!response.data.findUser.nickName) {
+      setNewSocialUser(response.data.findUser);
+      return navigate('/register');
+    } else {
+      setUser(response.data.findUser);
+      alert('로그인 성공 했습니다.');
+      return navigate('/');
+    }
+  } catch (error) {
+    console.error('로그인 실패:', error.response?.data);
+  }
+};
+
 export const userLogout = async () => {
   try {
     await api.get('/auth/logout');
@@ -50,5 +72,7 @@ export const validateToken = async (setUser, setAccessToken) => {
 
     setAccessToken(response.data.accessToken);
     setUser(response.data.findUser);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error.response?.data?.error);
+  }
 };
