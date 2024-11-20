@@ -1,20 +1,51 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import styles from './Register.module.scss/';
-import { validatePassword } from '../../utils/validatePassword';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import styles from './Register.module.scss';
+import { validatePassword } from '@/utils/validatePassword';
+import { registerUser } from '../../api/user.api';
+import useUserStore from '../../stores/useUserStore';
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [nickName, setNickName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [verifyPassword, setVerifyPassword] = useState(false);
+  const navigate = useNavigate();
+  const { newSocialUser } = useUserStore();
+  const [formData, setFormData] = useState({
+    name: '',
+    nickName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const [verifyPassword, setVerifyPassword] = useState('');
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((formData) => ({ ...formData, [name]: value }));
+  };
 
   const handleRegister = (e) => {
     e.preventDefault();
-    setVerifyPassword(validatePassword(password, confirmPassword));
+    if (!!newSocialUser) return registerUser(formData, navigate);
+
+    const passwordError = validatePassword(
+      formData.password,
+      formData.confirmPassword,
+    );
+
+    if (passwordError) return setVerifyPassword(passwordError);
+
+    setVerifyPassword('');
+    registerUser(formData, navigate);
   };
+
+  useEffect(() => {
+    if (newSocialUser) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        ...newSocialUser,
+      }));
+    }
+  }, []);
 
   return (
     <form className={styles.registerForm} onSubmit={handleRegister}>
@@ -23,30 +54,35 @@ const Register = () => {
         <label>Name</label>
         <input
           type="text"
+          name="name"
           placeholder="user name"
           required={true}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          disabled={!!newSocialUser}
+          value={formData.name}
+          onChange={handleInputChange}
         />
       </div>
       <div className={styles.id}>
         <label>NickName</label>
         <input
           type="text"
+          name="nickName"
           placeholder="user nickname"
           required={true}
-          value={nickName}
-          onChange={(e) => setNickName(e.target.value)}
+          value={formData.nickName}
+          onChange={handleInputChange}
         />
       </div>
       <div className={styles.id}>
         <label>Email</label>
         <input
           type="email"
+          name="email"
           placeholder="name@gmail.com"
           required={true}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          disabled={!!newSocialUser}
+          value={formData.email}
+          onChange={handleInputChange}
         />
       </div>
       <div className={styles.password}>
@@ -54,19 +90,23 @@ const Register = () => {
         {verifyPassword && <p className={styles.error}>{verifyPassword}</p>}
         <input
           type="password"
+          name="password"
           placeholder="Password"
           required={true}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          disabled={!!newSocialUser}
+          value={formData.password}
+          onChange={handleInputChange}
         />
       </div>
       <div className={styles.password}>
         <label>Confirm Password</label>
         <input
           type="password"
+          name="confirmPassword"
           placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          disabled={!!newSocialUser}
+          value={formData.confirmPassword}
+          onChange={handleInputChange}
         />
       </div>
       <button className={styles.submit} type="submit">

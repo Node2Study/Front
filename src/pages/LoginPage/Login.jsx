@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import styles from './Login.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import { loginEmail, googleLogin } from '../../api/user.api';
+import useUserStore from '../../stores/useUserStore';
+import { KAKAO_URL } from '../../constants/login.constants';
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+  const navigate = useNavigate();
+  const { setUser, setAccessToken, setNewSocialUser } = useUserStore();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -16,14 +21,16 @@ const Login = () => {
       setError('아이디와 비밀번호를 모두 입력해주세요.');
       return;
     }
+
+    loginEmail(email, password, setAccessToken, navigate, setUser);
   };
 
-  const kakaoLogin = () => {
-    const REST_API_KEY = import.meta.env.VITE_KAKAO_API_KEY;
-    const REDIRECT_URI = 'http://localhost:5173/login';
-    const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
-
-    window.location.href = kakaoAuthURL;
+  const handleSocialLogin = async (event) => {
+    if (event?.target?.name === 'kakao') {
+      window.location.href = KAKAO_URL;
+    } else {
+      googleLogin(event.credential, navigate, setUser, setNewSocialUser);
+    }
   };
 
   return (
@@ -54,13 +61,19 @@ const Login = () => {
       <button className={styles.submit} type="submit">
         Login
       </button>
-      <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-        <GoogleLogin onSuccess={''} onError={''} />
-      </GoogleOAuthProvider>
 
-      <button onClick={kakaoLogin}>
+      <button className={styles.googleLoginBtn}>
+        <GoogleLogin
+          name="google"
+          width={290}
+          onSuccess={handleSocialLogin}
+          onError={() => console.log('로그인 실패')}
+        />
+      </button>
+      <button className={styles.kakaoLoginBtn} onClick={handleSocialLogin}>
         <img
-          src="../public/image/kakao_login_medium_narrow.png"
+          name="kakao"
+          src="../public/image/kakao_login_medium_wide.png"
           alt="kakaoLogin"
         />
       </button>
