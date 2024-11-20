@@ -2,6 +2,12 @@
   width: 100%;
   height: 67px;
   border-bottom: 1px solid $gray200;
+  background-color: $white;
+
+  // 스크롤 고정
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .container {
@@ -26,11 +32,62 @@
   @extend .menu;
   font-size: 15px;
   font-weight: 600;
+
+  li {
+    a {
+      text-decoration: none;
+      color: #333;
+      font-size: 15px;
+      font-weight: 600;
+      position: relative; // 밑줄을 위한 설정
+
+      &:hover {
+        color: #007bff; // 원하는 텍스트 색상 변경
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px; // 텍스트 바로 아래
+        width: 0;
+        height: 2px;
+        background-color: #007bff; // 밑줄 색상
+        transition: width 0.3s ease; // 부드러운 애니메이션
+      }
+
+      &:hover::after {
+        width: 100%; // 밑줄 확장
+      }
+    }
+  }
 }
 
 .login {
   padding: 14px;
   background-color: $gray100;
+  border-radius: 10px;
+
+  &:hover {
+    background-color: #0056b3;
+    transition: background-color 0.5s ease;
+  }
+}
+
+.register {
+  padding: 14px;
+  background-color: $gray100;
+  border-radius: 10px;
+
+  &:hover {
+    background-color: #0056b3;
+    transition: background-color 0.5s ease;
+  }
+}
+
+.logo {
+  padding: 14px;
+  background-color: $white;
   border-radius: 10px;
 }
 

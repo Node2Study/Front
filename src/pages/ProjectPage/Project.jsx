@@ -2,10 +2,30 @@ import TextSlider from '@/components/common/TextSlider';
 import { NOTI_MESSAGES } from '@/constants/message';
 import styles from './Project.module.scss';
 import { TfiWrite } from 'react-icons/tfi';
+import { useState } from 'react';
 
 const Project = () => {
-  const handleSubmit = () => {
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    stack: '',
+    team: '',
+    github: '',
+    url: '',
+    start_date: '',
+    end_date: '',
+  });
+
+  const handleSubmit = (event) => {
+    // 새로고침 막기
+    event.preventDefault();
     console.log('등록성공');
+    console.log('formData', formData);
+  };
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
   };
 
   return (
@@ -19,92 +39,126 @@ const Project = () => {
       </div>
       <form className={styles.content} onSubmit={handleSubmit}>
         <div className={styles.inputGroup}>
-          <label className={styles.label} htmlFor="project-title">
+          <label className={styles.label} htmlFor="title">
             제목
           </label>
           <input
             type="text"
-            id="project-title"
+            id="title"
+            value={formData.title}
             className={styles.input}
             placeholder="프로젝트 제목을 입력해 주세요"
+            onChange={handleInputChange}
           />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label} htmlFor="project-description">
+          <label className={styles.label} htmlFor="description">
             설명
           </label>
           <input
             type="text"
-            id="project-description"
+            id="description"
+            value={formData.description}
             className={styles.input}
             placeholder="프로젝트 설명을 입력해 주세요"
+            onChange={handleInputChange}
           />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label} htmlFor="project-stack">
+          <label className={styles.label} htmlFor="stack">
             기술스택
           </label>
           <input
             type="text"
-            id="project-stack"
+            id="stack"
+            value={formData.stack}
             className={styles.input}
-            placeholder="기술스택을 입력해 주세요"
+            placeholder="HTML/CSS, JS, React.js, Node.js, Express.js, MongoDB"
+            onChange={handleInputChange}
           />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label} htmlFor="project-team">
-            팀 선택
+          <label className={styles.label} htmlFor="team">
+            프로젝트 팀원
           </label>
           <input
             type="text"
-            id="project-team"
+            id="team"
+            value={formData.team}
             className={styles.input}
-            placeholder="팀을 선택해 주세요"
+            placeholder="짱구, 철수, 유리, 훈이, 맹구"
+            onChange={handleInputChange}
           />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label} htmlFor="project-github">
+          <label className={styles.label} htmlFor="github">
             깃허브
           </label>
           <input
             type="text"
-            id="project-github"
+            id="github"
+            value={formData.github}
             className={styles.input}
             placeholder="깃허브 주소를 입력해 주세요"
+            onChange={handleInputChange}
           />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label} htmlFor="project-url">
+          <label className={styles.label} htmlFor="url">
             배포주소
           </label>
           <input
             type="text"
-            id="project-url"
+            id="url"
+            value={formData.url}
             className={styles.input}
             placeholder="배포주소를 입력해 주세요"
+            onChange={handleInputChange}
           />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label} htmlFor="project-start-date">
+          <label className={styles.label} htmlFor="start_date">
             시작날짜
           </label>
-          <input type="date" id="project-start-date" className={styles.input} />
+          <input type="date"
+                 id="start_date"
+                 value={formData.start_date}
+                 className={styles.input}
+                 onChange={handleInputChange}
+          />
         </div>
         <div className={styles.inputGroup}>
-          <label className={styles.label} htmlFor="project-end-date">
+          <label className={styles.label} htmlFor="end_date">
             종료날짜
           </label>
-          <input type="date" id="project-end-date" className={styles.input} />
+          <input type="date"
+                 id="end_date"
+                 value={formData.end_date}
+                 className={styles.input}
+                 onChange={handleInputChange}
+          />
+        </div>
+        <div className={styles.buttonGroup}>
+          <button type="submit" className={styles.registerButton}>
+            등록하기
+          </button>
+          <button type="button"
+                  className={styles.initButton}
+                  onClick={() =>
+                    setFormData({
+                      title: '',
+                      description: '',
+                      stack: '',
+                      team: '',
+                      github: '',
+                      url: '',
+                      start_date: '',
+                      end_date: '',
+                    })}>
+            초기화
+          </button>
         </div>
       </form>
-      <div className={styles.buttonGroup}>
-        <button type="submit" className={styles.registerButton}>
-          등록하기
-        </button>
-        <button type="button" className={styles.initButton}>
-          초기화
-        </button>
-      </div>
     </section>
   );
 };

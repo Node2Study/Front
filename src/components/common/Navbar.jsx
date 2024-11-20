@@ -9,8 +9,6 @@ const Navbar = ({ user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { resetUser } = useUserStore();
   const menu = [
-    { name: '메뉴2', link: '/menu2' },
-    { name: '메뉴3', link: '/menu3' },
     { name: '프로젝트 등록', link: '/upload' },
   ];
 
@@ -24,7 +22,11 @@ const Navbar = ({ user }) => {
   return (
     <nav className={styles.nav}>
       <div className={styles.container}>
-        <h1>Project name</h1>
+        <Link to={'/'}>
+          <div className={styles.logo}>
+            Project Name
+          </div>
+        </Link>
         <button
           className={styles.hamburger}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -47,6 +49,9 @@ const Navbar = ({ user }) => {
             <button className={styles.login} onClick={logout}>
               {user ? '로그아웃' : '로그인'}
             </button>
+          </Link>
+          <Link to={'/register'}>
+            <button className={styles.register}>회원가입</button>
           </Link>
         </div>
       </div>
