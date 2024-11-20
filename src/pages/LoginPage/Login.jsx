@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Login.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import { loginEmail } from '../../api/user.api';
+import useUserStore from '../../stores/useUserStore';
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+  const navigate = useNavigate();
+  const { setUser, setAccessToken } = useUserStore();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -16,6 +20,8 @@ const Login = () => {
       setError('아이디와 비밀번호를 모두 입력해주세요.');
       return;
     }
+
+    loginEmail(email, password, setAccessToken, navigate, setUser);
   };
 
   const kakaoLogin = () => {
@@ -54,6 +60,7 @@ const Login = () => {
       <button className={styles.submit} type="submit">
         Login
       </button>
+
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
         <GoogleLogin onSuccess={''} onError={''} />
       </GoogleOAuthProvider>

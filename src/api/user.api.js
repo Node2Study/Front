@@ -12,3 +12,43 @@ export const registerUser = async (formData, navigate) => {
     alert(error.response?.data?.error);
   }
 };
+
+export const loginEmail = async (
+  email,
+  password,
+  setAccessToken,
+  navigate,
+  setUser,
+) => {
+  try {
+    const response = await api.post('/auth/login', { email, password });
+
+    setUser(response.data.findUser);
+    setAccessToken(response.data.accessToken);
+
+    alert('로그인 성공 했습니다.');
+
+    return navigate('/');
+  } catch (error) {
+    alert(error.response?.data?.error);
+  }
+};
+
+export const userLogout = async () => {
+  try {
+    await api.get('/auth/logout');
+
+    alert('로그아웃 성공 했습니다.');
+  } catch (error) {
+    alert(error.response?.data?.error);
+  }
+};
+
+export const validateToken = async (setUser, setAccessToken) => {
+  try {
+    const response = await api.get('/user');
+
+    setAccessToken(response.data.accessToken);
+    setUser(response.data.findUser);
+  } catch (error) {}
+};

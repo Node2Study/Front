@@ -2,15 +2,24 @@ import { useState } from 'react';
 import styles from './Navbar.module.scss';
 import { Link } from 'react-router-dom';
 import { RxHamburgerMenu } from 'react-icons/rx';
+import useUserStore from '../../stores/useUserStore';
+import { userLogout } from '../../api/user.api';
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const { resetUser } = useUserStore();
   const menu = [
     { name: '메뉴2', link: '/menu2' },
     { name: '메뉴3', link: '/menu3' },
     { name: '프로젝트 등록', link: '/upload' },
   ];
+
+  const logout = () => {
+    if (user) {
+      resetUser();
+      userLogout();
+    }
+  };
 
   return (
     <nav className={styles.nav}>
@@ -34,8 +43,10 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <Link to={'/login'}>
-            <button className={styles.login}>로그인</button>
+          <Link to={user || '/login'}>
+            <button className={styles.login} onClick={logout}>
+              {user ? '로그아웃' : '로그인'}
+            </button>
           </Link>
         </div>
       </div>
