@@ -1,61 +1,128 @@
 .loginForm {
-  width: 400px;
-  background-color: rgba(255, 0, 0, 0.1);
-  box-shadow: rgb(0, 0, 0, 0.3) 0 0 0.3rem;
-  border-radius: 1rem;
-  padding: 1.5rem;
+  width: 360px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
   position: absolute;
-  top: 45%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
+  font-family: 'Arial', sans-serif;
 
-.error {
-  color: red;
-}
+  .title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
 
-.title {
-  text-align: center;
-  font-size: 2rem;
-  margin: 1rem;
-  padding: 0.4rem;
-}
+  .error {
+    color: #ff4d4d;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
 
-.id,
-.password {
-  padding: 0.5rem 0;
-  margin: 1rem 0;
-}
-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-form input {
-  width: 100%;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-}
+  .id,
+  .password {
+    margin-bottom: 1.5rem;
 
-.forGot {
-  display: block;
-  text-align: right;
-}
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
 
-.submit {
-  width: 100%;
-  padding: 0.5rem;
-  margin: 1rem 0;
-  border-radius: 0.5rem;
-  background-color: rgb(255, 149, 149);
-}
-.googleBtn {
-  width: 100%;
-  border-radius: 0.5rem;
-  background-color: rgb(255, 149, 149);
-}
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #333;
 
-.register {
-  display: block;
-  margin-top: 2rem;
-  text-align: center;
+      &:focus {
+        border-color: #ff8a8a;
+        outline: none;
+        box-shadow: 0 0 5px rgba(255, 138, 138, 0.3);
+      }
+    }
+  }
+
+  .forGot {
+    display: block;
+    text-align: right;
+    font-size: 0.85rem;
+    color: #999;
+    text-decoration: none;
+    margin-bottom: 1rem;
+
+    &:hover {
+      color: #ff8a8a;
+    }
+  }
+
+  .submit {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #ff8a8a;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #ff5e5e;
+    }
+  }
+
+  .googleLoginBtn {
+    margin-top: 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    bo &:hover {
+      background-color: #357ae8;
+    }
+  }
+
+  .kakaoLoginBtn {
+    margin-top: 0.5rem;
+    width: 100%;
+    text-align: center;
+
+    img {
+      width: 100%;
+      display: inline-block;
+      cursor: pointer;
+      transition: opacity 0.3s;
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  .register {
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 1.5rem;
+
+    &:hover {
+      color: #ff8a8a;
+    }
+  }
 }
