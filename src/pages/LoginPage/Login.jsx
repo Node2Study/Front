@@ -62,14 +62,12 @@ const Login = () => {
         Login
       </button>
 
-      <button className={styles.googleLoginBtn}>
-        <GoogleLogin
-          name="google"
-          width={290}
-          onSuccess={handleSocialLogin}
-          onError={() => console.log('로그인 실패')}
-        />
-      </button>
+      <GoogleLogin
+        className={styles.googleLoginBtn}
+        width={290}
+        onSuccess={handleSocialLogin}
+        onError={() => console.log('로그인 실패')}
+      />
       <button className={styles.kakaoLoginBtn} onClick={handleSocialLogin}>
         <img
           name="kakao"
