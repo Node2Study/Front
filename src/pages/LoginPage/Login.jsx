@@ -22,7 +22,7 @@ const Login = () => {
       return;
     }
 
-    loginEmail(email, password, setAccessToken, navigate, setUser);
+    loginEmail(email, password, setAccessToken, navigate, setUser, setError);
   };
 
   const handleSocialLogin = async (event) => {
@@ -61,20 +61,19 @@ const Login = () => {
       <button className={styles.submit} type="submit">
         Login
       </button>
-
-      <GoogleLogin
-        className={styles.googleLoginBtn}
-        width={290}
-        onSuccess={handleSocialLogin}
-        onError={() => console.log('로그인 실패')}
-      />
-      <button className={styles.kakaoLoginBtn} onClick={handleSocialLogin}>
+      <div className={styles.kakaoLoginBtn} onClick={handleSocialLogin}>
         <img
           name="kakao"
           src="../public/image/kakao_login_medium_wide.png"
           alt="kakaoLogin"
         />
-      </button>
+      </div>
+      <GoogleLogin
+        className={styles.googleLoginBtn}
+        onSuccess={handleSocialLogin}
+        onError={() => console.log('로그인 실패')}
+      />
+
       <Link to={'/register'} className={styles.register}>
         Register for free
       </Link>

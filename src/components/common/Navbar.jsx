@@ -10,7 +10,6 @@ const Navbar = ({ user }) => {
   const { resetUser } = useUserStore();
   const menu = [
     { name: '메뉴2', link: '/menu2' },
-    { name: '메뉴3', link: '/menu3' },
     { name: '프로젝트 등록', link: '/upload' },
   ];
 
@@ -43,6 +42,11 @@ const Navbar = ({ user }) => {
               </li>
             ))}
           </ul>
+          {user && (
+            <Link to={`/profile/${user._id}`}>
+              <button className={styles.login}>mypage</button>
+            </Link>
+          )}
           <Link to={user || '/login'}>
             <button className={styles.login} onClick={logout}>
               {user ? '로그아웃' : '로그인'}

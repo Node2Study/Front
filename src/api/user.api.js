@@ -19,18 +19,18 @@ export const loginEmail = async (
   setAccessToken,
   navigate,
   setUser,
+  setError,
 ) => {
   try {
     const response = await api.post('/auth/login', { email, password });
 
     setUser(response.data.findUser);
     setAccessToken(response.data.accessToken);
-
     alert('로그인 성공 했습니다.');
 
     return navigate('/');
   } catch (error) {
-    alert(error.response?.data?.error);
+    return setError(error.response?.data?.error);
   }
 };
 
@@ -45,14 +45,14 @@ export const googleLogin = async (
 
     if (!response.data.findUser.nickName) {
       setNewSocialUser(response.data.findUser);
-      return navigate('/register');
+      navigate('/register');
     } else {
       setUser(response.data.findUser);
       alert('로그인 성공 했습니다.');
-      return navigate('/');
+      navigate('/');
     }
   } catch (error) {
-    console.error('로그인 실패:', error.response?.data);
+    alert('로그인 실패:', error.response?.data);
   }
 };
 
@@ -60,6 +60,8 @@ export const userLogout = async () => {
   try {
     await api.get('/auth/logout');
 
+    localStorage.removeItem('user-storage');
+    window.location.reload();
     alert('로그아웃 성공 했습니다.');
   } catch (error) {
     alert(error.response?.data?.error);
@@ -72,6 +74,17 @@ export const validateToken = async (setUser, setAccessToken) => {
 
     setAccessToken(response.data.accessToken);
     setUser(response.data.findUser);
+  } catch (error) {
+    console.log(error.response?.data?.error);
+  }
+};
+
+export const deleteUserAccount = async (id) => {
+  try {
+    await api.delete(`/user/:${id}`);
+    alert('회원탈퇴 성공');
+    localStorage.removeItem('user-storage');
+    window.location.reload();
   } catch (error) {
     console.log(error.response?.data?.error);
   }
