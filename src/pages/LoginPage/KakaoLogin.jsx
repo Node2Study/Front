@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useUserStore from '../../stores/useUserStore';
 import { getAccessToken } from '../../api/kakao.api';
@@ -8,8 +8,11 @@ const KakaoLogin = () => {
   const [getToken, setGetToken] = useState(false);
   const { setUser, setNewSocialUser } = useUserStore();
 
-  // 액세스 토큰 가져오기
-  getAccessToken(setUser, setNewSocialUser, getToken, setGetToken, navigate);
+  useEffect(() => {
+    if (!getToken) {
+      getAccessToken(setUser, setNewSocialUser, setGetToken, navigate);
+    }
+  }, []);
 
   return <div>{'로그인 중...'}</div>;
 };

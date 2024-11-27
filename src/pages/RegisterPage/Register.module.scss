@@ -1,14 +1,10 @@
 .registerForm {
-  width: 400px;
-  background-color: #ffffff;
+  margin: 2rem auto;
+  background-color: #f8f9fa;
+  max-width: 24rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   padding: 2rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Arial', sans-serif;
 
   .title {
     text-align: center;

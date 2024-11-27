@@ -9,13 +9,10 @@ const CODE = new URL(window.location.href).searchParams.get('code');
 export const getAccessToken = async (
   setUser,
   setNewSocialUser,
-  getToken,
   setGetToken,
   navigate,
 ) => {
   try {
-    if (getToken) return;
-
     const response = await axios.post(
       'https://kauth.kakao.com/oauth/token',
       null,
