@@ -46,10 +46,10 @@ export const googleLogin = async (
 
     if (!response.data.findUser.nickName) {
       setNewSocialUser(response.data.findUser);
-      setAccessToken(response.data.accessToken);
       navigate('/register');
     } else {
       setUser(response.data.findUser);
+      setAccessToken(response.data.accessToken);
       alert('로그인 성공 했습니다.');
       navigate('/');
     }
@@ -61,7 +61,6 @@ export const googleLogin = async (
 export const userLogout = async () => {
   try {
     await api.get('/auth/logout');
-
     localStorage.removeItem('user-storage');
     window.location.reload();
     alert('로그아웃 성공 했습니다.');

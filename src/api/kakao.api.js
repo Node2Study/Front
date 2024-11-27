@@ -9,6 +9,7 @@ const CODE = new URL(window.location.href).searchParams.get('code');
 export const getAccessToken = async (
   setUser,
   setNewSocialUser,
+  setAccessToken,
   setGetToken,
   navigate,
 ) => {
@@ -31,7 +32,13 @@ export const getAccessToken = async (
     const token = response.data.access_token;
 
     // 프로필 정보 가져오기 호출
-    await getProfile(token, setUser, setNewSocialUser, navigate);
+    await getProfile(
+      token,
+      setUser,
+      setNewSocialUser,
+      setAccessToken,
+      navigate,
+    );
   } catch (error) {
     console.error('Error during token request:', error);
   } finally {
@@ -39,7 +46,13 @@ export const getAccessToken = async (
   }
 };
 
-const getProfile = async (token, setUser, setNewSocialUser, navigate) => {
+const getProfile = async (
+  token,
+  setUser,
+  setNewSocialUser,
+  setAccessToken,
+  navigate,
+) => {
   try {
     const response = await axios.get('https://kapi.kakao.com/v2/user/me', {
       headers: {
@@ -54,28 +67,36 @@ const getProfile = async (token, setUser, setNewSocialUser, navigate) => {
         profileImage: profile.properties.profile_image,
         email: profile.kakao_account.email,
       },
-      navigate,
       setUser,
       setNewSocialUser,
+      setAccessToken,
+      navigate,
     );
   } catch (error) {
     console.error('Error fetching user profile:', error);
   }
 };
 
-const kakaoLogin = async (idToken, navigate, setUser, setNewSocialUser) => {
+const kakaoLogin = async (
+  idToken,
+  setUser,
+  setNewSocialUser,
+  setAccessToken,
+  navigate,
+) => {
   try {
     const response = await api.post('/auth/social', { idToken });
 
     if (!response.data.findUser.nickName) {
       setNewSocialUser(response.data.findUser);
-      return navigate('/register');
+      navigate('/register');
     } else {
       setUser(response.data.findUser);
+      setAccessToken(response.data.accessToken);
       alert('로그인 성공 했습니다.');
-      return navigate('/');
+      navigate('/');
     }
-  } catch (error) {
+  } catch (eror) {
     console.error('로그인 실패:', error.response?.data);
   }
 };

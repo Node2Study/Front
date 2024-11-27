@@ -8,7 +8,7 @@ const AppLayout = ({ children }) => {
 
   return (
     <div className={styles.layout}>
-      <Navbar />
+      <Navbar user={user} />
       <main className={styles.main}>{children}</main>
       <Footer />
     </div>
