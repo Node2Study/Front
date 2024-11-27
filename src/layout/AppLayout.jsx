@@ -7,11 +7,11 @@ const AppLayout = ({ children }) => {
   const { user } = useUserStore();
 
   return (
-    <>
-      <Navbar user={user} />
+    <div className={styles.layout}>
+      <Navbar />
       <main className={styles.main}>{children}</main>
       <Footer />
-    </>
+    </div>
   );
 };
 
