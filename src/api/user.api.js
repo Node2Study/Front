@@ -9,7 +9,7 @@ export const registerUser = async (formData, navigate) => {
       navigate('/login');
     }
   } catch (error) {
-    alert(error.response?.data);
+    alert(error.response?.data?.error);
   }
 };
 
@@ -38,6 +38,7 @@ export const googleLogin = async (
   idToken,
   navigate,
   setUser,
+  setAccessToken,
   setNewSocialUser,
 ) => {
   try {
@@ -45,6 +46,7 @@ export const googleLogin = async (
 
     if (!response.data.findUser.nickName) {
       setNewSocialUser(response.data.findUser);
+      setAccessToken(response.data.accessToken);
       navigate('/register');
     } else {
       setUser(response.data.findUser);
@@ -52,7 +54,7 @@ export const googleLogin = async (
       navigate('/');
     }
   } catch (error) {
-    alert('로그인 실패:', error.response?.data);
+    alert('로그인 실패:', error.response?.data?.error);
   }
 };
 
@@ -64,7 +66,7 @@ export const userLogout = async () => {
     window.location.reload();
     alert('로그아웃 성공 했습니다.');
   } catch (error) {
-    alert(error.response?.data);
+    alert(error.response?.data?.error);
   }
 };
 
@@ -75,7 +77,7 @@ export const validateToken = async (setUser, setAccessToken) => {
     setAccessToken(response.data.accessToken);
     setUser(response.data.findUser);
   } catch (error) {
-    console.log(error.response.data);
+    console.log(error.response?.data?.error);
   }
 };
 
@@ -86,6 +88,6 @@ export const deleteUserAccount = async (id) => {
     localStorage.removeItem('user-storage');
     window.location.reload();
   } catch (error) {
-    console.log(error.response?.data);
+    console.log(error.response?.data?.error);
   }
 };

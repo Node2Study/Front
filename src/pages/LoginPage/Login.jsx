@@ -28,7 +28,13 @@ const Login = () => {
     if (event?.target?.name === 'kakao') {
       window.location.href = KAKAO_URL;
     } else {
-      googleLogin(event.credential, navigate, setUser, setNewSocialUser);
+      googleLogin(
+        event.credential,
+        navigate,
+        setUser,
+        setAccessToken,
+        setNewSocialUser,
+      );
     }
   };
 
