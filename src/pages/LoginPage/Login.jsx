@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import styles from './Login.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 import { loginEmail, googleLogin } from '../../api/user.api';
 import useUserStore from '../../stores/useUserStore';
 import { KAKAO_URL } from '../../constants/login.constants';
-const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 const Login = () => {
   const [email, setEmail] = useState('');

@@ -9,7 +9,7 @@ export const registerUser = async (formData, navigate) => {
       navigate('/login');
     }
   } catch (error) {
-    alert(error.response?.data?.error);
+    alert(error.response?.data);
   }
 };
 
@@ -64,7 +64,7 @@ export const userLogout = async () => {
     window.location.reload();
     alert('로그아웃 성공 했습니다.');
   } catch (error) {
-    alert(error.response?.data?.error);
+    alert(error.response?.data);
   }
 };
 
@@ -75,7 +75,7 @@ export const validateToken = async (setUser, setAccessToken) => {
     setAccessToken(response.data.accessToken);
     setUser(response.data.findUser);
   } catch (error) {
-    console.log(error.response?.data?.error);
+    console.log(error.response.data);
   }
 };
 
@@ -86,6 +86,6 @@ export const deleteUserAccount = async (id) => {
     localStorage.removeItem('user-storage');
     window.location.reload();
   } catch (error) {
-    console.log(error.response?.data?.error);
+    console.log(error.response?.data);
   }
 };

@@ -5,9 +5,7 @@ import useUserStore from '../stores/useUserStore';
 const PrivateRoute = () => {
   const { user } = useUserStore();
 
-  const isAuthenticated = !!user;
-
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+  return !!user ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;
