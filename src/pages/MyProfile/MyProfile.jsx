@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import styles from './MyProfile.module.scss'; // SCSS 파일 불러오기
 import useUserStore from '../../stores/useUserStore';
 import { deleteUserAccount } from '../../api/user.api';
-import { useNavigate } from 'react-router-dom';
 
 const MyProfile = () => {
   const [activeTab, setActiveTab] = useState('editProfile');
   const { user } = useUserStore();
-  const navigate = useNavigate();
   const [userId, setUserId] = useState(user.email);
   const lastText = userId.charAt(userId.length - 1);
 

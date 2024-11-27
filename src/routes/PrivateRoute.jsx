@@ -11,7 +11,7 @@ const PrivateRoute = () => {
     if (!accessToken) {
       validateToken(setUser, setAccessToken);
     }
-  }, [accessToken]);
+  }, []);
 
   const isToken = isTokenExpired(accessToken);
 
