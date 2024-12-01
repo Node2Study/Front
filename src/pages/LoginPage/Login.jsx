@@ -61,7 +61,7 @@ const Login = () => {
       <div className={styles.kakaoLoginBtn} onClick={handleSocialLogin}>
         <img
           name="kakao"
-          src="/public/image/kakao_login_medium_wide.png"
+          src="/image/kakao_login_medium_wide.png"
           alt="kakaoLogin"
         />
       </div>
