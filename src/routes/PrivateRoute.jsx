@@ -5,11 +5,11 @@ import { isTokenExpired } from '../utils/isTokenExpried';
 import { validateToken } from '../api/user.api';
 
 const PrivateRoute = () => {
-  const { accessToken, setUser, setAccessToken } = useUserStore();
+  const { accessToken } = useUserStore();
 
   useEffect(() => {
     if (!accessToken) {
-      validateToken(setUser, setAccessToken);
+      validateToken();
     }
   }, []);
 

@@ -1,4 +1,8 @@
 import api from './\bapi';
+import useUserStore from '../stores/useUserStore';
+
+const { setNewSocialUser, setUser, setAccessToken, resetUser } =
+  useUserStore.getState();
 
 export const registerUser = async (formData, navigate) => {
   try {
@@ -13,14 +17,7 @@ export const registerUser = async (formData, navigate) => {
   }
 };
 
-export const loginEmail = async (
-  email,
-  password,
-  setAccessToken,
-  navigate,
-  setUser,
-  setError,
-) => {
+export const loginEmail = async (email, password, navigate, setError) => {
   try {
     const response = await api.post('/auth/login', { email, password });
 
@@ -34,13 +31,7 @@ export const loginEmail = async (
   }
 };
 
-export const googleLogin = async (
-  idToken,
-  navigate,
-  setUser,
-  setAccessToken,
-  setNewSocialUser,
-) => {
+export const googleLogin = async (idToken, navigate) => {
   try {
     const response = await api.post('/auth/social', { idToken });
 
@@ -60,16 +51,19 @@ export const googleLogin = async (
 
 export const userLogout = async () => {
   try {
-    await api.get('/auth/logout');
-    localStorage.removeItem('user-storage');
-    window.location.reload();
-    alert('로그아웃 성공 했습니다.');
+    const response = await api.get('/auth/logout');
+    if (response.status === 200) {
+      resetUser();
+      localStorage.removeItem('user-storage');
+      window.location.reload();
+      alert('로그아웃 성공 했습니다.');
+    }
   } catch (error) {
     alert(error.response?.data?.error);
   }
 };
 
-export const validateToken = async (setUser, setAccessToken) => {
+export const validateToken = async () => {
   try {
     const response = await api.get('/user');
 

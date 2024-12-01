@@ -1,18 +1,14 @@
 import axios from 'axios';
 import api from './\bapi';
+import useUserStore from '../stores/useUserStore';
 
 const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
 const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
 
 const CODE = new URL(window.location.href).searchParams.get('code');
+const { setUser, setNewSocialUser, setAccessToken } = useUserStore.getState();
 
-export const getAccessToken = async (
-  setUser,
-  setNewSocialUser,
-  setAccessToken,
-  setGetToken,
-  navigate,
-) => {
+export const getAccessToken = async (setGetToken, navigate) => {
   try {
     const response = await axios.post(
       'https://kauth.kakao.com/oauth/token',
@@ -32,13 +28,7 @@ export const getAccessToken = async (
     const token = response.data.access_token;
 
     // 프로필 정보 가져오기 호출
-    await getProfile(
-      token,
-      setUser,
-      setNewSocialUser,
-      setAccessToken,
-      navigate,
-    );
+    await getProfile(token, navigate);
   } catch (error) {
     console.error('Error during token request:', error);
   } finally {
@@ -46,13 +36,7 @@ export const getAccessToken = async (
   }
 };
 
-const getProfile = async (
-  token,
-  setUser,
-  setNewSocialUser,
-  setAccessToken,
-  navigate,
-) => {
+const getProfile = async (token, navigate) => {
   try {
     const response = await axios.get('https://kapi.kakao.com/v2/user/me', {
       headers: {
@@ -67,9 +51,6 @@ const getProfile = async (
         profileImage: profile.properties.profile_image,
         email: profile.kakao_account.email,
       },
-      setUser,
-      setNewSocialUser,
-      setAccessToken,
       navigate,
     );
   } catch (error) {
@@ -77,13 +58,7 @@ const getProfile = async (
   }
 };
 
-const kakaoLogin = async (
-  idToken,
-  setUser,
-  setNewSocialUser,
-  setAccessToken,
-  navigate,
-) => {
+const kakaoLogin = async (idToken, navigate) => {
   try {
     const response = await api.post('/auth/social', { idToken });
 

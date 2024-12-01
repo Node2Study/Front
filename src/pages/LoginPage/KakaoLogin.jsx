@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useUserStore from '../../stores/useUserStore';
 import { getAccessToken } from '../../api/kakao.api';
 
 const KakaoLogin = () => {
   const navigate = useNavigate();
   const [getToken, setGetToken] = useState(false);
-  const { setUser, setNewSocialUser, setAccessToken } = useUserStore();
 
   useEffect(() => {
     if (!getToken) {
-      getAccessToken(
-        setUser,
-        setNewSocialUser,
-        setAccessToken,
-        setGetToken,
-        navigate,
-      );
+      getAccessToken(setGetToken, navigate);
     }
   }, []);
 
