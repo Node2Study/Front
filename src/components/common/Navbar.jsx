@@ -2,12 +2,10 @@ import { useState } from 'react';
 import styles from './Navbar.module.scss';
 import { Link } from 'react-router-dom';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import useUserStore from '../../stores/useUserStore';
 import { userLogout } from '../../api/user.api';
 
 const Navbar = ({ user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { resetUser } = useUserStore();
   const menu = [
     { name: '메뉴2', link: '/menu2' },
     { name: '프로젝트 등록', link: '/upload' },
@@ -15,7 +13,6 @@ const Navbar = ({ user }) => {
 
   const logout = () => {
     if (user) {
-      resetUser();
       userLogout();
     }
   };

@@ -15,7 +15,7 @@ api.interceptors.request.use(
   (config) => {
     const { accessToken } = useUserStore.getState();
 
-    if (accessToken && isTokenExpired(accessToken)) {
+    if (isTokenExpired(accessToken)) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     } else {
       config.withCredentials = true;

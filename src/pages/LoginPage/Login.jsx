@@ -3,7 +3,6 @@ import styles from './Login.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { loginEmail, googleLogin } from '../../api/user.api';
-import useUserStore from '../../stores/useUserStore';
 import { KAKAO_URL } from '../../constants/login.constants';
 
 const Login = () => {
@@ -11,7 +10,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { setUser, setAccessToken, setNewSocialUser } = useUserStore();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -21,20 +19,14 @@ const Login = () => {
       return;
     }
 
-    loginEmail(email, password, setAccessToken, navigate, setUser, setError);
+    loginEmail(email, password, navigate, setError);
   };
 
   const handleSocialLogin = async (event) => {
     if (event?.target?.name === 'kakao') {
       window.location.href = KAKAO_URL;
     } else {
-      googleLogin(
-        event.credential,
-        navigate,
-        setUser,
-        setAccessToken,
-        setNewSocialUser,
-      );
+      googleLogin(event.credential, navigate);
     }
   };
 
